@@ -8,7 +8,9 @@
                     <div class="ml-2 font-semibold text-[18px]">{{ post.name }}</div>
                 </div>
 
-                <div @click="isMenu = !isMenu" class="relative">
+                <div @click="isMenu = !isMenu" class="relative"
+                    v-if="user && user.identities && user.identities[0].user_id === post.user_id"
+                >
                     <button :disabled="isDeleting"
                         class="flex items-center text-white p-1 h-[24px] w-[24px] hover:bg-gray-800 rounded-full cursor-pointer"
                         :class="isMenu ? 'bg-gray-800' : ''">
@@ -31,7 +33,7 @@
                 </div>
                 <div class="bg-black rounded-lg w-[calc(100%-50px)] text-sm w-full font-light">
                     <div class="py-2 text-gray-300">{{ post.text }}</div>
-                    <img :src="post.picture" class="mx-auto w-full mt-2 pr-2 rounded" v-if="post && post.picture">
+                    <img :src="runtimeConfig.public.bucketUrl + post.picture" class="mx-auto w-full mt-2 pr-2 rounded" v-if="post && post.picture">
 
                     <div class="absolute mt-2 w-full ml-2">
                         <button :disabled="isLike" class="flex items-center gap-1">
@@ -85,6 +87,6 @@ const props = defineProps({
     post: Object
 })
 
-// const client = useSupabaseClient()
-// const user = useSupabaseUser()
+const client = useSupabaseClient()
+const user = useSupabaseUser()
 </script>

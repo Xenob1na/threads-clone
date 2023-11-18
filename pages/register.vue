@@ -32,7 +32,7 @@
                 </button> -->
                 <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                     <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form class="space-y-6" @submit.prevent="signIn()">
+                        <form class="space-y-6" @submit.prevent="signUp()">
                             <div>
                                 <label for="email" class="block text-sm font-medium leading-6 text-white">Email
                                     address</label>
@@ -76,21 +76,16 @@ const password = ref(null)
 const errorMsg = ref(null)
 const successMsg = ref(null)
 
-async function signIn() {
+async function signUp() {
     try {
-       const { data, error } = await client.auth.signInWithPassword({
+       const { data, error } = await client.auth.signUp({
            email: email.value,
            password: password.value,
        });
        if (error) throw error
+       successMsg.value = 'Check your email for confirmation'   
     } catch (error) {
         errorMsg.value = error.message
     }
 }
-
-watchEffect(() => {
-    if (user.value) {
-        return navigateTo('/')
-    }
-})
 </script>

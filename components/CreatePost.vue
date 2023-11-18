@@ -11,9 +11,9 @@
             <div id="Post" class="z-40 bottom-0 max-h-[100vh-200px] w-full px-3 max-w-[500px] mx-auto">
                 <div class="py-2 w-full">
                     <div class="flex items-center">
-                        <div class="flex items-center text-white">
-                            <img src="https://picsum.photos/id/202/50" class="rounded-full h-[35px]">
-                            <div class="ml-2 font-semibold text-[18px]">Danil Gromov</div>
+                        <div v-if="user" class="flex items-center text-white">
+                            <img src="https://placehold.co/100" class="rounded-full h-[35px]">
+                            <div class="ml-2 font-semibold text-[18px]">{{ user.identities[0].identity_data.email }}</div>
                         </div>
                     </div>
 
@@ -65,8 +65,8 @@ import { useUserStore } from '../stores/user';
 const userStore = useUserStore();
 
 
-// const client = useSupabaseClient()
-// const user = useSupabaseUser()
+const client = useSupabaseClient()
+const user = useSupabaseUser()
 
 let text = ref(null)
 let isLoading = ref(false)
